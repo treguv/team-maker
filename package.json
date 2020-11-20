@@ -4,7 +4,7 @@
   "description": "This application takes in command line input and generates a webpage displaying all the team members generated",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test":"jest"
   },
   "repository": {
     "type": "git",
