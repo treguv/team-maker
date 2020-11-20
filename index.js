@@ -1,3 +1,3 @@
 const questions = require("./src/questions");
 
-questions.promptUserManager();
+var theManager = questions.promptUserManager();

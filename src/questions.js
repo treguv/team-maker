@@ -1,5 +1,7 @@
 const inquirer = require("inquirer");
 const Manager = require("../lib/Manager");
+const Intern = require("../lib/Intern");
+const Engineer = require("../lib/Engineer");
 //Add the manager
 const promptUserManager = () => {
   return inquirer
@@ -65,6 +67,8 @@ const promptUserManager = () => {
         answers.number
       );
       console.log(createdManager);
+      //call function that will ask them to choose who next
+      addNext();
       return createdManager;
     });
 };
@@ -139,7 +143,14 @@ const promptUserEngineer = () => {
       },
     ])
     .then((answers) => {
-      console.log(answers);
+      const createdEngineer = new Engineer(
+        answers.name,
+        answers.id,
+        answers.email,
+        answers.github
+      );
+      console.log(createdEngineer);
+      addMore();
     });
 };
 
@@ -214,18 +225,52 @@ const promptUserIntern = () => {
       },
     ])
     .then((answers) => {
-      console.log(answers);
+      const createdIntern = new Intern(
+        answers.name,
+        answers.id,
+        answers.email,
+        answers.school
+      );
+      console.log(createdIntern);
+      addMore();
     });
 };
 const addNext = () => {
-  return inquirer.prompt([
-    {
-      type: "list",
-      name: "next",
-      message: "Who do you want to add next?",
-      choices: ["Engineer", "Intern"],
-    },
-  ]);
+  return inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "next",
+        message: "Who do you want to add next?",
+        choices: ["Engineer", "Intern"],
+      },
+    ])
+    .then((answer) => {
+      if (answer.next === "Engineer") {
+        promptUserEngineer();
+      } else {
+        promptUserIntern();
+      }
+    });
+};
+
+const addMore = () => {
+  return inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "more",
+        message: "Would you like to add more members?",
+        choices: ["Yes", "No"],
+      },
+    ])
+    .then((answer) => {
+      if (answer.more === "Yes") {
+        addNext();
+      } else {
+        console.log("Your team creation is finished!");
+      }
+    });
 };
 exports.promptUserManager = promptUserManager;
 exports.promptUserEngineer = promptUserEngineer;
