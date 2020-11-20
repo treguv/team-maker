@@ -1,73 +1,72 @@
 const inquirer = require("inquirer");
+const Manager = require("../lib/Manager");
 //Add the manager
 const promptUserManager = () => {
-  return inquirer.prompt([
-    {
-      type: "input",
-      name: "name",
-      message: "What is the Manager's name?",
-      validate: (nameInput) => {
-        if (nameInput) {
-          return true;
-        } else {
-          console.log("Please enter a name!");
-          return false;
-        }
+  return inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "What is the Manager's name?",
+        validate: (nameInput) => {
+          if (nameInput) {
+            return true;
+          } else {
+            console.log("Please enter a name!");
+            return false;
+          }
+        },
       },
-    },
-    {
-      type: "input",
-      name: "id",
-      message: "What is the Manager's employee ID?",
-      validate: (idInput) => {
-        if (idInput) {
-          return true;
-        } else {
-          console.log("Please enter an ID!");
-          return false;
-        }
+      {
+        type: "input",
+        name: "id",
+        message: "What is the Manager's employee ID?",
+        validate: (idInput) => {
+          if (idInput) {
+            return true;
+          } else {
+            console.log("Please enter an ID!");
+            return false;
+          }
+        },
       },
-    },
-    {
-      type: "input",
-      name: "name",
-      message: "What is the Manager's name?",
-      validate: (nameInput) => {
-        if (nameInput) {
-          return true;
-        } else {
-          console.log("Please enter a name!");
-          return false;
-        }
+      {
+        type: "input",
+        name: "email",
+        message: "What is the Manager's email?",
+        validate: (nameInput) => {
+          if (nameInput) {
+            return true;
+          } else {
+            console.log("Please enter an email!");
+            return false;
+          }
+        },
       },
-    },
-    {
-      type: "input",
-      name: "email",
-      message: "What is the Manager's email?",
-      validate: (nameInput) => {
-        if (nameInput) {
-          return true;
-        } else {
-          console.log("Please enter an email!");
-          return false;
-        }
+      {
+        type: "input",
+        name: "number",
+        message: "What is the Manager's office number?",
+        validate: (numberInput) => {
+          if (numberInput) {
+            return true;
+          } else {
+            console.log("Please enter a number!");
+            return false;
+          }
+        },
       },
-    },
-    {
-      type: "input",
-      name: "number",
-      message: "What is the Manager's office number?",
-      validate: (numberInput) => {
-        if (numberInput) {
-          return true;
-        } else {
-          console.log("Please enter a number!");
-          return false;
-        }
-      },
-    },
-  ]);
+    ])
+    .then((answers) => {
+      const createdManager = new Manager(
+        answers.name,
+        answers.id,
+        answers.email,
+        answers.number
+      );
+      console.log(createdManager);
+      return createdManager;
+    });
 };
 // add the engineer
 const promptUserEngineer = () => {
