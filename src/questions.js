@@ -1,11 +1,18 @@
 const inquirer = require("inquirer");
+const fs = require("fs");
 const Manager = require("../lib/Manager");
 const Intern = require("../lib/Intern");
 const Engineer = require("../lib/Engineer");
 const writeHtml = require("../src/writeHTML");
+const writeHTML = require("../src/writeHTML");
+//THis will store everything until it is ready to be written
+let pageContents = "";
 //Add the manager
 const promptUserManager = () => {
+  //make empty page and write to it
   writeHtml.makeEmpty();
+  pageContents = pageContents + writeHtml.writeBeggining();
+  //console.log(pageContents);
   return inquirer
     .prompt([
       {
@@ -68,7 +75,8 @@ const promptUserManager = () => {
         answers.email,
         answers.number
       );
-      console.log(createdManager);
+      //console.log(createdManager);
+      pageContents = pageContents + writeHtml.writeEmployee(createdManager);
       //call function that will ask them to choose who next
       addNext();
       return createdManager;
@@ -151,6 +159,7 @@ const promptUserEngineer = () => {
         answers.email,
         answers.github
       );
+      pageContents = pageContents + writeHtml.writeEmployee(createdEngineer);
       console.log(createdEngineer);
       addMore();
     });
@@ -233,6 +242,7 @@ const promptUserIntern = () => {
         answers.email,
         answers.school
       );
+      pageContents = pageContents + writeHtml.writeEmployee(createdIntern);
       console.log(createdIntern);
       addMore();
     });
@@ -270,6 +280,13 @@ const addMore = () => {
       if (answer.more === "Yes") {
         addNext();
       } else {
+        //Write the closing part of the webpage
+        pageContents = pageContents + writeHTML.writeEnd();
+        fs.writeFile("./dist/index.html", pageContents, (err) => {
+          if (err) {
+            console.log(err);
+          }
+        });
         console.log("Your team creation is finished!");
       }
     });
