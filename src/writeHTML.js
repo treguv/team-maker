@@ -29,7 +29,7 @@ const writeBeggining = () => {
       crossorigin="anonymous"
     />
 
-    <title>Hello, world!</title>
+    <title>My Team</title>
   </head>
   <header class="bg-danger">
     <h3 class="text-center py-5">My Team</h3>
@@ -112,7 +112,6 @@ const writeEmployee = (employee) => {
     </ul>
     </div>
     </div>`;
-  console.log(employeeCard);
   return employeeCard;
 };
 module.exports = {

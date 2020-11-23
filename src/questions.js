@@ -12,7 +12,6 @@ const promptUserManager = () => {
   //make empty page and write to it
   writeHtml.makeEmpty();
   pageContents = pageContents + writeHtml.writeBeggining();
-  //console.log(pageContents);
   return inquirer
     .prompt([
       {
@@ -75,7 +74,6 @@ const promptUserManager = () => {
         answers.email,
         answers.number
       );
-      //console.log(createdManager);
       pageContents = pageContents + writeHtml.writeEmployee(createdManager);
       //call function that will ask them to choose who next
       addNext();
@@ -160,7 +158,6 @@ const promptUserEngineer = () => {
         answers.github
       );
       pageContents = pageContents + writeHtml.writeEmployee(createdEngineer);
-      console.log(createdEngineer);
       addMore();
     });
 };
@@ -243,7 +240,6 @@ const promptUserIntern = () => {
         answers.school
       );
       pageContents = pageContents + writeHtml.writeEmployee(createdIntern);
-      console.log(createdIntern);
       addMore();
     });
 };
