@@ -81,23 +81,34 @@ const writeEmployee = (employee) => {
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">ID: ${employee.id}</li>
-        <li class="list-group-item">Email: ${employee.email}</li>`;
+        <a href = "mailto:${employee.email}?"> <li class="list-group-item">Email: ${employee.email}</li></a>`;
   //here we can figure out what employee we have
   let title, unique;
   if (role === "Manager") {
     title = "Office Number";
     unique = employee.officeNumber;
+    employeeCard =
+      employeeCard +
+      `
+  <li class="list-group-item">${title}:${unique}</li>`;
   } else if (role === "Intern") {
     title = "School";
     unique = employee.school;
+    employeeCard =
+      employeeCard +
+      `
+  <li class="list-group-item">${title}:${unique}</li>`;
   } else {
     title = "Github Username";
     unique = employee.github;
+    employeeCard =
+      employeeCard +
+      `
+    <a href ="http://www.github.com/${unique}"> <li class="list-group-item">${title}:${unique}</li></a>`;
   }
   employeeCard =
     employeeCard +
     `
-    <li class="list-group-item">${title}:${unique}</li>
     </ul>
     </div>
     </div>`;
